@@ -7,4 +7,8 @@ MYSQL_PASSWORD
 MYSQL_LISTENING_PORT
 
 Create a new MySQLLink and pass the name of the database to make a connection.
- 
+
+example:
+
+$MySQL = new MySQLLink('my_database');
+$query = $MySQL->ExecuteSQL("SELECT * FROM my_table");
