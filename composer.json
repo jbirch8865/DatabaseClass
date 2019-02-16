@@ -1,0 +1,18 @@
+{
+    "name": "jbirch8865/databaseclass",
+    "description": "Base PHP Mysql class",
+    "type": "library",
+    "authors": [
+        {
+            "name": "jbirch8865",
+            "email": "jbirch88655@gmail.com"
+        }
+    ],
+	"autoload": {
+		"psr-4": {
+			"DatabaseLink\\" : ""
+		}
+	}
+	
+    "require": {}
+}
