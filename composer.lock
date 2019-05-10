@@ -1,0 +1,45 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "9efc1c75e266dcd3bb417f0adf6a3d66",
+    "packages": [
+        {
+            "name": "jbirc/configuration-file",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jbirch8865/ConfigurationFile.git",
+                "reference": "f92adf9774b8fe8f2b02bf140cd06d868a74ce23"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jbirch8865/ConfigurationFile/zipball/f92adf9774b8fe8f2b02bf140cd06d868a74ce23",
+                "reference": "f92adf9774b8fe8f2b02bf140cd06d868a74ce23",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Joel Birch",
+                    "email": "jbirch88655@gmail.com"
+                }
+            ],
+            "description": "basic php class for reading and writing to a configuration file",
+            "time": "2019-05-10T21:18:23+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "jbirc/configuration-file": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

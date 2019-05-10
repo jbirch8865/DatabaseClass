@@ -7,5 +7,7 @@
             "email": "jbirch88655@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "jbirc/configuration-file": "dev-master"
+    }
 }

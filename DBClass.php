@@ -1,9 +1,9 @@
 <?php
 namespace DatabaseLink;
+include 'vendor/autoload.php';
 Class SQLConnectionError extends \Exception{}
 Class SQLQueryError extends \Exception{}
 Class DuplicatePrimaryKeyRequest extends \Exception{}
-
 
 
 Class MySQLLink
@@ -12,12 +12,15 @@ Class MySQLLink
 	private $Database;
 	private $LastInsertID;
 	private $LastLogID;
+	private $UserName;
+	private $Password;
+	private $Hostname;
+	private $ListeningPort;
 
 	function __construct($Database)
 	{
 		
 		$this->LoadConfigurationFile();
-		die();
 		try 
 		{
 			$this->EstablishDatabaseLink($Database);
@@ -29,12 +32,43 @@ Class MySQLLink
 	
 	private function LoadConfigurationFile()
 	{
-		$ConfigFile = parse_ini_file ("config.ini");
-		print_r($ConfigFile);
+		try 
+		{
+			$configs = new \Config\ConfigurationFile;
+			if($this->AreConfigurationValuesValid($configs))
+			{
+				$this->UserName = $configs['username'];
+				$this->Password = $configs['password'];
+				$this->Hostname = $configs['hostname'];
+				$this->ListeningPort = $configs['listeningport'];
+			}else
+			{
+				throw new \Exception("Databse configs are invalid");
+			}
+		} catch (\Exception $e)
+		{
+			throw new \Exception("Error loading config file.  Please ensure there is a valid config.local.ini file in the relative current directory.");
+		}
 	}
+	
+	private function AreConfigurationValuesValid($configs)
+	{
+		if(isset($configs->username)&&isset($configs->password)&&isset($configs->hostname)&&isset($configs->listeningport))
+		{
+			if($Con = mysqli_connect($configs['hostname'], $configs['username'], $configs['password'], 'syslog', $configs['listeningport']))
+			{
+				mysqli_close($Con);
+				return true;
+			}else
+			{
+				return false;
+			}
+		}
+	}
+	
 	private function EstablishDatabaseLink($Database)
 	{
-		If($Connection=mysqli_connect(getenv('MYSQL_HOSTNAME'), getenv('MYSQL_USERNAME'), getenv('MYSQL_PASSWORD'), $Database, getenv('MYSQL_LISTENING_PORT'))) 
+		If($Connection=mysqli_connect($this->Hostname, $this->UserName, $this->Password, $Database, $this->ListeningPort)) 
 		{	
 			$this->Database = $Connection;
 		} Else 
@@ -43,16 +77,6 @@ Class MySQLLink
 		}
 	}
 	
-	function __set($name, $value)
-	{
-		try
-		{
-			$this->EstablishDatabaseLink($value);	
-		} catch (SQLConnectionError $e)
-		{
-			
-		}
-	}
 	function ExecuteSQLQuery( $Query, $Type = '10' )
 	{
 		Try
